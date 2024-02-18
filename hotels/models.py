@@ -42,6 +42,9 @@ class Room(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"{self.hotel} {self.number}"
+
 
 class Reservation(models.Model):
     user = models.ForeignKey("auth.User", on_delete=models.CASCADE, related_name="reservations")
