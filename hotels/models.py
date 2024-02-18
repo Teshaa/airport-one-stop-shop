@@ -18,6 +18,12 @@ class Hotel(models.Model):
 
     def __str__(self):
         return  self.name
+    
+
+
+class HotelImage(models.Model):
+    image = models.ImageField(upload_to="upload/hotels")
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="images")
 
 
 class RoomType(models.Model):
@@ -44,6 +50,12 @@ class Room(models.Model):
 
     def __str__(self):
         return f"{self.hotel} {self.number}"
+    
+
+
+class RoomImage(models.Model):
+    image = models.ImageField(upload_to="upload/room")
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="images")
 
 
 class Reservation(models.Model):

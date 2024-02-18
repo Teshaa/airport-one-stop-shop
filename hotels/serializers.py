@@ -3,6 +3,10 @@ from rest_framework import serializers
 from hotels.models import Hotel, Room, RoomType, Reservation
 
 
+class HotelImageSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Hotel
+
 class HotelSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Hotel
