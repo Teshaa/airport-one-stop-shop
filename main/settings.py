@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'users',
     'core',
     'hotels',
+    'meals',
+    'payments',
 
     'rest_framework',
     'rest_framework.authtoken',
