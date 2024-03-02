@@ -2,7 +2,7 @@ from django.db import models
 from phonenumber_field import modelfields
 
 
-# Create your models here.
+ # Create your models here.
 
 
 class Hotel(models.Model):
