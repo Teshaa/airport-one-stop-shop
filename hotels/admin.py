@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from hotels.models import Hotel, RoomType, Room, Reservation
+from hotels.models import Hotel, HotelImage, RoomImage, RoomType, Room, Reservation
 
 
 # Register your models here.
@@ -9,13 +9,22 @@ from hotels.models import Hotel, RoomType, Room, Reservation
 class RoomTabularInline(admin.TabularInline):
     model = Room
 
+class HotelImageTabularInline(admin.TabularInline):
+    model = HotelImage
+
+class RoomImageTabularInline(admin.TabularInline):
+    model = RoomImage
+
 
 @admin.register(Hotel)
 class HotelAdmin(admin.ModelAdmin):
     list_display = (
         "id", "name", "address", "email", "phoneNumber", "rating", "amenities", "description", "created_at",
         "updated_at")
-    inlines = [RoomTabularInline]
+    inlines = [
+        HotelImageTabularInline,
+        RoomTabularInline
+    ]
 
 
 @admin.register(RoomType)
@@ -28,6 +37,7 @@ class RoomTypeAdmin(admin.ModelAdmin):
 class ReservationAdmin(admin.ModelAdmin):
     list_display = [
         "id", "user", "room", "checkin_date", "checkout_date", "status", "created_at", "updated_at"]
+    
 
 
 @admin.register(Room)
@@ -35,3 +45,6 @@ class RoomAdmin(admin.ModelAdmin):
     list_display = [
         "id", "number", "description", "type", "capacity", "price_per_night", "available", "feature",
         "created_at", "updated_at"]
+    inlines= [
+        RoomImageTabularInline
+    ]
