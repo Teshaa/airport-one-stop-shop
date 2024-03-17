@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import FoodItem, FoodOrder, OrderItem, Restaurant
+from .models import FoodItem, FoodOrder, FoodType, OrderItem, Restaurant
 # Register your models here.
 
 class OrderItemInline(admin.TabularInline):
@@ -36,9 +36,16 @@ class FoodOrderAdmin(admin.ModelAdmin):
     
 
 @admin.register(OrderItem)
-class FoodItemAdmin(admin.ModelAdmin):
+class OrderItemAdmin(admin.ModelAdmin):
     list_display=(
         "order", "food_item", "quantity",
+          )
+    
+
+@admin.register(FoodType)
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display=(
+        "name", "description", "created_at","updated_at",
           )
     
 
