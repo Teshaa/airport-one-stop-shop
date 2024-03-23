@@ -1,5 +1,7 @@
 from django.db import models
 from phonenumber_field import modelfields
+from taggit.managers import TaggableManager
+
 
 
  # Create your models here.
@@ -11,7 +13,7 @@ class Hotel(models.Model):
     email = models.EmailField(max_length=255)
     phoneNumber = modelfields.PhoneNumberField()
     rating = models.PositiveIntegerField(default=3)
-    amenities = models.JSONField()
+    amenities = TaggableManager()
     description = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -42,7 +44,7 @@ class Room(models.Model):
     type = models.ForeignKey(RoomType, on_delete=models.CASCADE, related_name="rooms")
     capacity = models.PositiveIntegerField(default=3, help_text="number of guests it can accommodate")
     price_per_night = models.DecimalField(decimal_places=2, max_digits=12)
-    feature = models.JSONField()
+    feature = TaggableManager()
     description = models.TextField(null=True, blank=True)
     available = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
