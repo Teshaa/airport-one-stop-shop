@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'django_filters',
+    'taggit',
     'corsheaders',
 ]
 
@@ -79,6 +80,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'main.wsgi.application'
 
+TAGGIT_CASE_INSENSITIVE = True
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

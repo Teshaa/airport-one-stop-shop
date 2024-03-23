@@ -25,10 +25,11 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('users/', include('users.urls')),
     path('hotels/', include('hotels.urls', namespace="hotels")),
+    path('meals/', include('meals.urls', namespace="meals")),
 ]
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-admin.site.site_header = "Apple Master Admin"
-admin.site.site_title = "Apple Master Admin"
+admin.site.site_header = "Airport one stop shop Admin"
+admin.site.site_title = "Airport one stop shop Admin"
