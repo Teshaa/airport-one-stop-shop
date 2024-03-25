@@ -1,5 +1,6 @@
 from rest_framework import serializers
-
+from taggit.serializers import (TagListSerializerField,
+                                TaggitSerializer)
 from hotels.models import Hotel, HotelImage, Room, RoomImage, RoomType, Reservation  
 
 
@@ -26,10 +27,10 @@ class RoomTypeSerializer(serializers.HyperlinkedModelSerializer):
 
 
 
-class NestedRoomSerializer(serializers.HyperlinkedModelSerializer):
+class NestedRoomSerializer(TaggitSerializer,serializers.HyperlinkedModelSerializer):
     type = RoomTypeSerializer()
     images = RoomImageSerializer(read_only=True, many=True)
-
+    feature = TagListSerializerField()
     class Meta:
         model = Room
         fields = [
@@ -45,9 +46,10 @@ class NestedRoomSerializer(serializers.HyperlinkedModelSerializer):
 
 
 
-class HotelSerializer(serializers.HyperlinkedModelSerializer):
+class HotelSerializer(TaggitSerializer,serializers.HyperlinkedModelSerializer):
     images = HotelImageSerializer(read_only=True, many=True)
     rooms = NestedRoomSerializer(read_only=True, many=True)
+    amenities = TagListSerializerField()
     class Meta:
         model = Hotel
         fields = (
@@ -74,10 +76,12 @@ class ReservationSerializer(serializers.HyperlinkedModelSerializer):
         }
 
 
-class RoomSerializer(serializers.HyperlinkedModelSerializer):
+class RoomSerializer(TaggitSerializer,serializers.HyperlinkedModelSerializer):
     hotel = HotelSerializer()
     type = RoomTypeSerializer()
     images = RoomImageSerializer(read_only=True, many=True)
+    feature = TagListSerializerField()
+
 
 
     class Meta:
