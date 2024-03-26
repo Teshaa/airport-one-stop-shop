@@ -14,6 +14,10 @@ class RestaurantViewSet(viewsets.ModelViewSet):
 class FoodTypeViewSet(viewsets.ModelViewSet):
     serializer_class = FoodTypeSerializer
     queryset = FoodType.objects.all() 
+
+
+    
+
     
 
 

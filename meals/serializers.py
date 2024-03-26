@@ -28,7 +28,7 @@ class FoodItemSerializer(serializers.HyperlinkedModelSerializer):
         model = FoodItem
         fields = (
             "id", "url", "restaurant", "name", "price","preparation_time", 
-            "type",
+            "type","rating",
             "readily_available","image", "created_at", "updated_at"
             )
         extra_kwargs= {
@@ -63,6 +63,10 @@ class OrderItemSerializer(serializers.HyperlinkedModelSerializer):
             "order":{"view_name": "users:order-detail"},
             "food_item":{"view_name": "meals:food-detail"}
             }
+        
+
+
+
 
 
 

@@ -2,6 +2,7 @@ from rest_framework import serializers
 from taggit.serializers import (TagListSerializerField,
                                 TaggitSerializer)
 from hotels.models import Hotel, HotelImage, Room, RoomImage, RoomType, Reservation  
+from taggit.models import Tag
 
 
 class HotelImageSerializer(serializers.ModelSerializer):
@@ -87,7 +88,7 @@ class RoomSerializer(TaggitSerializer,serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Room
         fields = [
-            "id", "url", "number", "description", "type",
+            "id", "url", "number", "description", "type", "rating",
             "hotel", "capacity", "price_per_night", "available",
             "feature", "images", "created_at", "updated_at"
             ]
@@ -97,3 +98,8 @@ class RoomSerializer(TaggitSerializer,serializers.HyperlinkedModelSerializer):
             # "hotel": {"view_name": "hotel:hotel-detail"}
         }
 
+
+class TagSerializer(TaggitSerializer, serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ['name']

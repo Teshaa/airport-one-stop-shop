@@ -19,14 +19,14 @@ class RoomImageTabularInline(admin.TabularInline):
 @admin.register(Hotel)
 class HotelAdmin(admin.ModelAdmin):
     list_display = (
-        "id", "name", "address", "email", "phoneNumber", "rating", "description", "created_at",
-        "updated_at")
-    fieldsets = (
-    (None, {'fields': ('amenities',)}),
-)
+        "id", "name", "address", "email",
+          "phoneNumber", "rating", "description",
+            "created_at", "updated_at"
+            )
+    # fieldsets = ((None, {'fields': ('amenities',)}),)
     inlines = [
         HotelImageTabularInline,
-        RoomTabularInline
+        # RoomTabularInline
     ]
 
 
@@ -46,9 +46,10 @@ class ReservationAdmin(admin.ModelAdmin):
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
     list_display = [
-        "id", "number", "description", "type", "capacity", "price_per_night", "available",
-        "created_at", "updated_at"]
-    fieldsets = ((None, {'fields': ('feature',)}),)
+        "id", "number", "description", "type", "capacity",
+          "price_per_night", "available",  "created_at", "updated_at"
+          ]
+    # fieldsets = ((None, {'fields': ('feature',)}),)
     inlines= [
         RoomImageTabularInline
     ]

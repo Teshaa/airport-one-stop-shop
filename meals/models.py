@@ -41,6 +41,7 @@ class FoodItem(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     preparation_time = models.IntegerField(help_text="Estimated time in minutes to prepare the food item", null=True, blank=True)
     readily_available = models.BooleanField(null=True, blank=True)
+    rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)], default=3)
     image = models.ImageField(upload_to="upload/food")    
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
