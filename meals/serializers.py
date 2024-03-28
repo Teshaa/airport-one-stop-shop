@@ -43,26 +43,16 @@ class FoodOrderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = FoodOrder
         fields = (
-            "id", "url", "user", "restaurant", "price",
-          "order_time", "order_time", "status", "created_at", "updated_at"
+            "id", "url", "user", "price", "status", 
+          "food_item", "food_item", "status", "created_at", "updated_at"
           )
         extra_kwargs= {
             "url": {"view_name": "meals:restaurant-detail"}, 
             "user":{"view_name": "users:user-detail"},
-            "restaurant":{"view_name": "meals:restaurant-detail"}
+            "food_item": {"view_name": "meals:food-detail"}
             }
         
 
-
-class OrderItemSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = FoodItem
-        fields = ("id", "url",  "order", "food_item", "quantity",)
-        extra_kwargs= {
-            "url": {"view_name": "meals:items-detail"},  
-            "order":{"view_name": "users:order-detail"},
-            "food_item":{"view_name": "meals:food-detail"}
-            }
         
 
 
