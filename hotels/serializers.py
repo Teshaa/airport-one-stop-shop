@@ -74,6 +74,8 @@ class ReservationSerializer(serializers.HyperlinkedModelSerializer):
             "url": {"view_name": "hotel:reservation-detail"},
             "user": {"view_name": "users:user-detail"},
             "room": {"view_name": "hotel:room-detail"},
+            "checkout_date": {"read_only": True},
+            "status": {"read_only": True}
         }
 
 
