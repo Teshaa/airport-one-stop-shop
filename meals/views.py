@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 
 from meals.models import FoodItem, FoodOrder, FoodType, Restaurant
-from meals.serializers import FoodItemSerializer, FoodOrderSerializer, FoodTypeSerializer, OrderItemSerializer, RestaurantSerializer
+from meals.serializers import FoodItemSerializer, FoodOrderSerializer, FoodTypeSerializer, RestaurantSerializer
 # Create your views here.
 
 

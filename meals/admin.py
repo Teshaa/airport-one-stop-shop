@@ -26,8 +26,8 @@ class RestaurantAdmin(admin.ModelAdmin):
 @admin.register(FoodOrder)
 class FoodOrderAdmin(admin.ModelAdmin):
     list_display=(
-        "user", "price","food_item", "quantity",
-          "order_time", "order_time", "status"
+        "user", "price", "status","food_item", "quantity",
+          "food_item", "status"
           )
 
     
