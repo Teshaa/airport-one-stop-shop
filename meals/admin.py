@@ -1,16 +1,11 @@
 from django.contrib import admin
-from .models import FoodItem, FoodOrder, FoodType, OrderItem, Restaurant, RestaurantImage
+from .models import FoodItem, FoodOrder, FoodType, Restaurant, RestaurantImage
 # Register your models here.
 
-class OrderItemInline(admin.TabularInline):
-    model = OrderItem
 
 class FoodInline(admin.TabularInline):
     model = FoodItem
 
-
-class OrderInline(admin.TabularInline):
-    model = FoodOrder
 
 
 class RestaurantImageInline(admin.TabularInline):
@@ -25,29 +20,20 @@ class FoodItemAdmin(admin.ModelAdmin):
 @admin.register(Restaurant)
 class RestaurantAdmin(admin.ModelAdmin):
     list_display=("name", "logo", "location")
-    inlines = [RestaurantImageInline, FoodInline, OrderInline]
+    inlines = [RestaurantImageInline, FoodInline]
 
 
 @admin.register(FoodOrder)
 class FoodOrderAdmin(admin.ModelAdmin):
     list_display=(
-        "user", "restaurant", "total_price",
+        "user", "price","food_item", "quantity",
           "order_time", "order_time", "status"
           )
-    inlines = [
-        OrderItemInline
-    ]
-    
 
-@admin.register(OrderItem)
-class OrderItemAdmin(admin.ModelAdmin):
-    list_display=(
-        "order", "food_item", "quantity",
-          )
     
 
 @admin.register(FoodType)
-class OrderItemAdmin(admin.ModelAdmin):
+class FoodTypeAdmin(admin.ModelAdmin):
     list_display=(
         "name", "description", "created_at","updated_at",
           )
