@@ -1,4 +1,4 @@
-from .models import FoodItem, FoodOrder, FoodType, OrderItem, Restaurant, RestaurantImage
+from .models import FoodItem, FoodOrder, FoodType, Restaurant, RestaurantImage
 from rest_framework import serializers
 
 
@@ -43,7 +43,7 @@ class FoodOrderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = FoodOrder
         fields = (
-            "id", "url", "user", "restaurant", "total_price",
+            "id", "url", "user", "restaurant", "price",
           "order_time", "order_time", "status", "created_at", "updated_at"
           )
         extra_kwargs= {

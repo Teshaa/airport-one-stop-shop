@@ -1,6 +1,6 @@
 from rest_framework import routers
 
-from meals.views import FoodItemViewSet, FoodOrderViewSet, FoodTypeViewSet, OrderItemViewset, RestaurantViewSet
+from meals.views import FoodItemViewSet, FoodOrderViewSet, FoodTypeViewSet, RestaurantViewSet
 app_name = "meals"
 
 

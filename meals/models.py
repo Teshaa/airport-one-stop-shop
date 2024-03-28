@@ -51,22 +51,17 @@ class FoodItem(models.Model):
 
 class FoodOrder(models.Model):
     user = models.ForeignKey("auth.User", on_delete=models.CASCADE, related_name="orders")
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name="orders")
-    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     order_time = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=255, choices=(
         ("cancelled", "Cancelled"), 
         ("pending", "Pending"),
         ("delivered", "Delivered"),
     ))
+    food_item = models.ForeignKey(FoodItem, on_delete=models.CASCADE, related_name="food_orders")
+    quantity = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
         return self.name
-
-# asociation
-class OrderItem(models.Model):
-    order = models.ForeignKey(FoodOrder, on_delete=models.CASCADE, related_name="order_items")
-    food_item = models.ForeignKey(FoodItem, on_delete=models.CASCADE, related_name="order_items")
-    quantity = models.IntegerField()
