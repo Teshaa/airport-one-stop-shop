@@ -1,14 +1,17 @@
 from rest_framework import serializers
 from taggit.serializers import (TagListSerializerField,
                                 TaggitSerializer)
-from hotels.models import Hotel, HotelImage, Room, RoomImage, RoomType, Reservation  
+from hotels.models import Hotel, HotelImage, Room, RoomImage, RoomType, Reservation
 from taggit.models import Tag
+
+from users.serializers import UserSerializer
 
 
 class HotelImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = HotelImage
         fields = ("id", "image")
+
 
 class RoomImageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,17 +24,17 @@ class RoomTypeSerializer(serializers.HyperlinkedModelSerializer):
         model = RoomType
         fields = (
             "id", "url", "name", "description", "created_at", "updated_at",
-            )
+        )
         extra_kwargs = {
             "url": {"view_name": "hotel:room-type-detail"}
         }
 
 
-
-class NestedRoomSerializer(TaggitSerializer,serializers.HyperlinkedModelSerializer):
+class NestedRoomSerializer(TaggitSerializer, serializers.HyperlinkedModelSerializer):
     type = RoomTypeSerializer()
     images = RoomImageSerializer(read_only=True, many=True)
     feature = TagListSerializerField()
+
     class Meta:
         model = Room
         fields = [
@@ -45,17 +48,16 @@ class NestedRoomSerializer(TaggitSerializer,serializers.HyperlinkedModelSerializ
         }
 
 
-
-
-class HotelSerializer(TaggitSerializer,serializers.HyperlinkedModelSerializer):
+class HotelSerializer(TaggitSerializer, serializers.HyperlinkedModelSerializer):
     images = HotelImageSerializer(read_only=True, many=True)
     rooms = NestedRoomSerializer(read_only=True, many=True)
     amenities = TagListSerializerField()
+
     class Meta:
         model = Hotel
         fields = (
             "id", "url", "name", "address", "email", "phoneNumber", "rating",
-            "amenities", "description", "images","rooms", "created_at",
+            "amenities", "description", "images", "rooms", "created_at",
             "updated_at"
         )
         extra_kwargs = {
@@ -64,26 +66,31 @@ class HotelSerializer(TaggitSerializer,serializers.HyperlinkedModelSerializer):
         }
 
 
-class ReservationSerializer(serializers.HyperlinkedModelSerializer):
+class ReservationSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
     class Meta:
         model = Reservation
         fields = [
-            "id", "user", "room", "checkin_date", "checkout_date", "status", "created_at", "updated_at"]
+            "id", "user", "room", "checkin_date", "nights", "price_per_night", "status", "created_at", "updated_at"]
 
         extra_kwargs = {
-            "url": {"view_name": "hotel:reservation-detail"},
-            "user": {"view_name": "users:user-detail"},
-            "room": {"view_name": "hotel:room-detail"},
+            # "url": {"view_name": "hotel:reservation-detail"},
+            # "room": {"view_name": "hotel:room-detail"},
+            "status": {"read_only": True},
+            "price_per_night": {"read_only": True},
         }
 
+    def create(self, validated_data):
+        print(validated_data)
+        return super().create(validated_data)
 
-class RoomSerializer(TaggitSerializer,serializers.HyperlinkedModelSerializer):
+
+class RoomSerializer(TaggitSerializer, serializers.HyperlinkedModelSerializer):
     hotel = HotelSerializer()
     type = RoomTypeSerializer()
     images = RoomImageSerializer(read_only=True, many=True)
     feature = TagListSerializerField()
-
-
 
     class Meta:
         model = Room
@@ -91,7 +98,7 @@ class RoomSerializer(TaggitSerializer,serializers.HyperlinkedModelSerializer):
             "id", "url", "number", "description", "type", "rating",
             "hotel", "capacity", "price_per_night", "available",
             "feature", "images", "created_at", "updated_at"
-            ]
+        ]
         extra_kwargs = {
             "url": {"view_name": "hotel:room-detail"},
             # "type": {"view_name": "hotel:room-type-detail"},

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     'django_filters',
     'taggit',
     'corsheaders',
+    'django_daraja'
 ]
 
 MIDDLEWARE = [
@@ -159,3 +161,13 @@ REST_FRAMEWORK = {
         # 'users.authentication.BearerAuthentication'
     ]
 }
+
+MPESA_ENVIRONMENT = config('MPESA_ENVIRONMENT', default="sandbox", cast=str)
+MPESA_CONSUMER_KEY = config('MPESA_CONSUMER_KEY', default="", cast=str)
+MPESA_CONSUMER_SECRET = config('MPESA_CONSUMER_SECRET', default="", cast=str)
+MPESA_SHORTCODE = config('MPESA_SHORTCODE', default="", cast=str)
+MPESA_SHORTCODE_TYPE = config('MPESA_SHORTCODE_TYPE', default="", cast=str)
+MPESA_PASSKEY = config('MPESA_PASSKEY', default="", cast=str)
+MPESA_INITIATOR_USERNAME = config('MPESA_INITIATOR_USERNAME', default="", cast=str)
+MPESA_INITIATOR_SECURITY_CREDENTIAL = config('MPESA_INITIATOR_SECURITY_CREDENTIAL', default="", cast=str)
+MPESA_EXPRESS_SHORTCODE = config('MPESA_EXPRESS_SHORTCODE', default="", cast=str)

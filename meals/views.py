@@ -2,7 +2,10 @@ from django.shortcuts import render
 from rest_framework import viewsets
 
 from meals.models import FoodItem, FoodOrder, FoodType, OrderItem, Restaurant
-from meals.serializers import FoodItemSerializer, FoodOrderSerializer, FoodTypeSerializer, OrderItemSerializer, RestaurantSerializer
+from meals.serializers import FoodItemSerializer, FoodOrderSerializer, FoodTypeSerializer, OrderItemSerializer, \
+    RestaurantSerializer
+
+
 # Create your views here.
 
 
@@ -13,12 +16,7 @@ class RestaurantViewSet(viewsets.ModelViewSet):
 
 class FoodTypeViewSet(viewsets.ModelViewSet):
     serializer_class = FoodTypeSerializer
-    queryset = FoodType.objects.all() 
-
-
-    
-
-    
+    queryset = FoodType.objects.all()
 
 
 class FoodItemViewSet(viewsets.ModelViewSet):
@@ -30,7 +28,7 @@ class FoodOrderViewSet(viewsets.ModelViewSet):
     serializer_class = FoodOrderSerializer
     queryset = FoodOrder.objects.all()
 
+
 class OrderItemViewset(viewsets.ModelViewSet):
     serializer_class = OrderItemSerializer
     queryset = OrderItem.objects.all()
-

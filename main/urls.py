@@ -27,6 +27,8 @@ urlpatterns = [
     path('hotels/', include('hotels.urls', namespace="hotels")),
     path('meals/', include('meals.urls', namespace="meals")),
     path('', include('core.urls', namespace="core")),
+    path('payments/', include('payments.urls', namespace="payments")),
+
 ]
 
 
