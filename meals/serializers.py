@@ -54,7 +54,8 @@ class FoodOrderSerializer(serializers.ModelSerializer):
             "food_item", "food_item", "status", "created_at", "updated_at"
         )
         extra_kwargs = {
-            "status": {"read_only": True}
+            "status": {"read_only": True},
+            "price": {"read_only": True},
         }
 
     def to_representation(self, instance):

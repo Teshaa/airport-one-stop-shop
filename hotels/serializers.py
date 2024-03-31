@@ -81,9 +81,10 @@ class ReservationSerializer(serializers.ModelSerializer):
             "price_per_night": {"read_only": True},
         }
 
-    def create(self, validated_data):
-        print(validated_data)
-        return super().create(validated_data)
+    def to_representation(self, instance):
+        _dict = super().to_representation(instance)
+        _dict["room"] = RoomSerializer(instance=instance.room, context=self.context).data
+        return _dict
 
 
 class RoomSerializer(TaggitSerializer, serializers.HyperlinkedModelSerializer):
