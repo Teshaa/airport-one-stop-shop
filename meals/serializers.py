@@ -1,4 +1,4 @@
-from .models import FoodItem, FoodOrder, FoodType, OrderItem, Restaurant, RestaurantImage
+from .models import FoodItem, FoodOrder, FoodType, Restaurant, RestaurantImage
 from rest_framework import serializers
 from decouple import config
 
@@ -47,22 +47,24 @@ class FoodOrderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = FoodOrder
         fields = (
-            "id", "url", "user", "restaurant", "total_price",
-            "order_time", "order_time", "status", "created_at", "updated_at"
-        )
-        extra_kwargs = {
-            "url": {"view_name": "meals:restaurant-detail"},
-            "user": {"view_name": "users:user-detail"},
-            "restaurant": {"view_name": "meals:restaurant-detail"}
-        }
-
-
-class OrderItemSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = FoodItem
-        fields = ("id", "url", "order", "food_item", "quantity",)
-        extra_kwargs = {
-            "url": {"view_name": "meals:items-detail"},
-            "order": {"view_name": "users:order-detail"},
+            "id", "url", "user", "price", "status", 
+          "food_item", "food_item", "status", "created_at", "updated_at"
+          )
+        extra_kwargs= {
+            "url": {"view_name": "meals:restaurant-detail"}, 
+            "user":{"view_name": "users:user-detail"},
             "food_item": {"view_name": "meals:food-detail"}
-        }
+            }
+        
+
+        
+
+
+
+
+
+
+
+
+
+
