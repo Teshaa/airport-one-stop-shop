@@ -58,6 +58,7 @@ class FoodOrder(models.Model):
     ), default="pending")
     food_item = models.ForeignKey(FoodItem, on_delete=models.CASCADE, related_name="food_orders")
     quantity = models.IntegerField()
+    terminal = models.ForeignKey("core.Terminal", related_name="orders", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

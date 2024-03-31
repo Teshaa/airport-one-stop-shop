@@ -1,3 +1,4 @@
+from core.serializers import TerminalSerializer
 from users.serializers import UserSerializer
 from .models import FoodItem, FoodOrder, FoodType, Restaurant, RestaurantImage
 from rest_framework import serializers
@@ -50,7 +51,7 @@ class FoodOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = FoodOrder
         fields = (
-            "id", "user", "price", "quantity",
+            "id", "user", "price", "quantity", "terminal",
             "food_item", "food_item", "status", "created_at", "updated_at"
         )
         extra_kwargs = {
@@ -61,4 +62,6 @@ class FoodOrderSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         _dict = super().to_representation(instance)
         _dict["food_item"] = FoodItemSerializer(instance=instance.food_item, context=self.context).data
+        _dict["terminal"] = TerminalSerializer(instance=instance.terminal, context=self.context).data
+        
         return _dict
