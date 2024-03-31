@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 
+from meals.filters import ProductFilter
 from meals.models import FoodItem, FoodOrder, FoodType, Restaurant
 from meals.serializers import FoodItemSerializer, FoodOrderSerializer, FoodTypeSerializer, RestaurantSerializer
 
@@ -21,6 +22,9 @@ class FoodTypeViewSet(viewsets.ModelViewSet):
 class FoodItemViewSet(viewsets.ModelViewSet):
     serializer_class = FoodItemSerializer
     queryset = FoodItem.objects.all()
+    filterset_class = ProductFilter
+    search_fields = ["name", "description", "restaurant__name"]
+
 
 
 class FoodOrderViewSet(viewsets.ModelViewSet):

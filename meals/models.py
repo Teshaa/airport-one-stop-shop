@@ -12,7 +12,6 @@ class Restaurant(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
     logo = models.ImageField(upload_to="upload/logo")
-    location = models.CharField(max_length=255, help_text="Location of the restaurant within JKIA (e.g., Terminal 1, Gate 15)")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

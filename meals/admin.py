@@ -20,7 +20,7 @@ class FoodItemAdmin(admin.ModelAdmin):
 
 @admin.register(Restaurant)
 class RestaurantAdmin(admin.ModelAdmin):
-    list_display = ("name", "logo", "location")
+    list_display = ("name", "logo", )
     inlines = [RestaurantImageInline, FoodInline]
 
 
