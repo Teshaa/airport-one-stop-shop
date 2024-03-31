@@ -3,8 +3,7 @@ from phonenumber_field import modelfields
 from taggit.managers import TaggableManager
 
 
-
- # Create your models here.
+# Create your models here.
 
 
 class Hotel(models.Model):
@@ -19,8 +18,7 @@ class Hotel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return  self.name
-    
+        return self.name
 
 
 class HotelImage(models.Model):
@@ -53,7 +51,6 @@ class Room(models.Model):
 
     def __str__(self):
         return f"{self.hotel} {self.number}"
-    
 
 
 class RoomImage(models.Model):
@@ -64,8 +61,9 @@ class RoomImage(models.Model):
 class Reservation(models.Model):
     user = models.ForeignKey("auth.User", on_delete=models.CASCADE, related_name="reservations")
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="reservations")
+    price_per_night = models.DecimalField(decimal_places=2, max_digits=12)
     checkin_date = models.DateField()
-    checkout_date = models.DateField()
+    nights = models.PositiveIntegerField(default=1)
     status = models.CharField(max_length=255, choices=(
         ("confirmed", "Confirmed"),
         ("cancelled", "Canceled"),

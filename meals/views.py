@@ -3,6 +3,8 @@ from rest_framework import viewsets
 
 from meals.models import FoodItem, FoodOrder, FoodType, Restaurant
 from meals.serializers import FoodItemSerializer, FoodOrderSerializer, FoodTypeSerializer, RestaurantSerializer
+
+
 # Create your views here.
 
 
@@ -13,12 +15,7 @@ class RestaurantViewSet(viewsets.ModelViewSet):
 
 class FoodTypeViewSet(viewsets.ModelViewSet):
     serializer_class = FoodTypeSerializer
-    queryset = FoodType.objects.all() 
-
-
-    
-
-    
+    queryset = FoodType.objects.all()
 
 
 class FoodItemViewSet(viewsets.ModelViewSet):
@@ -30,3 +27,7 @@ class FoodOrderViewSet(viewsets.ModelViewSet):
     serializer_class = FoodOrderSerializer
     queryset = FoodOrder.objects.all()
 
+    def perform_create(self, serializer):
+        serializer.validated_data["user"] = self.request.user
+        serializer.validated_data["price"] = serializer.validated_data["food_item"].price
+        super().perform_create(serializer)
