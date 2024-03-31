@@ -1,3 +1,4 @@
+from users.serializers import UserSerializer
 from .models import FoodItem, FoodOrder, FoodType, Restaurant, RestaurantImage
 from rest_framework import serializers
 from decouple import config
@@ -43,28 +44,14 @@ class FoodItemSerializer(serializers.HyperlinkedModelSerializer):
         }
 
 
-class FoodOrderSerializer(serializers.HyperlinkedModelSerializer):
+class FoodOrderSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
     class Meta:
         model = FoodOrder
         fields = (
-            "id", "url", "user", "price", "status", 
-          "food_item", "food_item", "status", "created_at", "updated_at"
-          )
-        extra_kwargs= {
-            "url": {"view_name": "meals:restaurant-detail"}, 
-            "user":{"view_name": "users:user-detail"},
-            "food_item": {"view_name": "meals:food-detail"}
-            }
-        
-
-        
-
-
-
-
-
-
-
-
-
-
+            "id", "user", "price", "status",
+            "food_item", "food_item", "status", "created_at", "updated_at"
+        )
+        extra_kwargs = {
+        }
