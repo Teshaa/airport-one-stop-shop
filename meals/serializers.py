@@ -50,8 +50,14 @@ class FoodOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = FoodOrder
         fields = (
-            "id", "user", "price", "status",
+            "id", "user", "price", "quantity",
             "food_item", "food_item", "status", "created_at", "updated_at"
         )
         extra_kwargs = {
+            "status": {"read_only": True}
         }
+
+    def to_representation(self, instance):
+        _dict = super().to_representation(instance)
+        _dict["food_item"] = FoodItemSerializer(instance=instance.food_item, context=self.context).data
+        return _dict
