@@ -3,6 +3,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from taggit.models import Tag
 
+from hotels.filters import AccomodationFilter
 from hotels.models import Hotel, Room, RoomType, Reservation
 from hotels.serializers import HotelSerializer, RoomSerializer, RoomTypeSerializer, ReservationSerializer, TagSerializer
 
@@ -16,6 +17,9 @@ class HotelViewSet(viewsets.ModelViewSet):
 # Create your views here.
 class RoomViewSet(viewsets.ModelViewSet):
     serializer_class = RoomSerializer
+    filterset_class = AccomodationFilter
+    search_fields = ["number", "description", "hotel__name"]
+
 
     # queryset = Room.objects.filter(available=True, reservations__not__in=Reservation.object.filter())
     def get_queryset(self):
