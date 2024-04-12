@@ -44,6 +44,15 @@ class FoodItemSerializer(serializers.HyperlinkedModelSerializer):
             "type": {"view_name": "meals:food-type-detail"}
         }
 
+    def to_representation(self, instance):
+        _dict = super().to_representation(instance)
+        _dict["restaurant"] = RestaurantSerializer(instance=instance.restaurant , context=self.context).data
+        
+        return _dict
+
+
+    
+
 
 class FoodOrderSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
@@ -65,3 +74,7 @@ class FoodOrderSerializer(serializers.ModelSerializer):
         _dict["terminal"] = TerminalSerializer(instance=instance.terminal, context=self.context).data
         
         return _dict
+
+
+class OrderPaymentSerializer(serializers.Serializer):
+    phoneNumber = serializers.CharField(max_length=10)
