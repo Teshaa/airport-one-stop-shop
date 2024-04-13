@@ -39,7 +39,8 @@ class NestedRoomSerializer(TaggitSerializer, serializers.HyperlinkedModelSeriali
         fields = [
             "id", "url", "number", "description", "type", "capacity", "price_per_night", "available",
             "feature", "images",
-            "created_at", "updated_at"]
+            "created_at", "updated_at"
+            ]
         extra_kwargs = {
             "url": {"view_name": "hotel:room-detail"},
             "type": {"view_name": "hotel:room-type-detail"},
@@ -55,7 +56,7 @@ class HotelSerializer(TaggitSerializer, serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Hotel
         fields = (
-            "id", "url", "name", "address", "email", "phoneNumber", "rating",
+            "id", "url", "name", "logo", "address", "email", "phoneNumber", "rating",
             "amenities", "description", "images", "rooms", "created_at",
             "updated_at"
         )

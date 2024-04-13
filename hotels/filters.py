@@ -10,6 +10,7 @@ class AccomodationFilter(filters.FilterSet):
         label="Comma separated Tags",
         method='filter_tags'
     )
+    hotel = filters.CharFilter(field_name='hotel')
     def filter_tags(self, queryset, name, value):
         tags = value.strip().split(",")
         return queryset.filter(**{'feature__name__in': tags})
