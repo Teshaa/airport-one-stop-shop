@@ -9,6 +9,8 @@ from taggit.managers import TaggableManager
 class Hotel(models.Model):
     name = models.CharField(max_length=50)
     logo = models.ImageField(upload_to="hotels/logos")
+    longitude = models.DecimalField(max_digits=22, decimal_places=16)
+    latitude = models.DecimalField(max_digits=22, decimal_places=16)
     address = models.CharField(max_length=255)
     email = models.EmailField(max_length=255)
     phoneNumber = modelfields.PhoneNumberField()

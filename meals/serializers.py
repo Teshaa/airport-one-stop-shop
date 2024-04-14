@@ -16,7 +16,7 @@ class RestaurantSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Restaurant
-        fields = ("id", "url", "name", "logo",  "images", "created_at", "updated_at")
+        fields = ("id", "url", "name", "logo", "longitude", "latitude", "description", "address",  "images", "created_at", "updated_at")
         extra_kwargs = {"url": {"view_name": "meals:restaurant-detail"}}
 
 
