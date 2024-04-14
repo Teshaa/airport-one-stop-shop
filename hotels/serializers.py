@@ -56,7 +56,7 @@ class HotelSerializer(TaggitSerializer, serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Hotel
         fields = (
-            "id", "url", "name", "logo", "address", "email", "phoneNumber", "rating",
+            "id", "url", "name", "logo", "longitude", "latitude", "address", "email", "phoneNumber", "rating",
             "amenities", "description", "images", "rooms", "created_at",
             "updated_at"
         )
