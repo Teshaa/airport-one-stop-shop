@@ -78,7 +78,7 @@ class FoodOrder(models.Model):
     
 
     class Meta:
-        ordering = ["-updated_at"]
+        ordering = ["-status", "-updated_at"]
 
 
 

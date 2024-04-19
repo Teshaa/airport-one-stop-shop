@@ -72,7 +72,7 @@ class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
         fields = [
-            "id", "user", "room", "checkin_date", "nights", "price_per_night", "status", "created_at", "updated_at"]
+            "id",  "status", "user", "room", "checkin_date", "nights", "price_per_night", "created_at", "updated_at"]
 
         extra_kwargs = {
             # "url": {"view_name": "hotel:reservation-detail"},
