@@ -19,6 +19,9 @@ class Restaurant(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    
+    class Meta:
+        ordering = ["-updated_at"]
 
 
 class FoodType(models.Model):
@@ -30,6 +33,9 @@ class FoodType(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    
+    class Meta:
+        ordering = ["-updated_at"]
 
 
 class FoodItem(models.Model):
@@ -48,6 +54,9 @@ class FoodItem(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    
+    class Meta:
+        ordering = ["-updated_at"]
 
 
 class FoodOrder(models.Model):
@@ -60,12 +69,17 @@ class FoodOrder(models.Model):
     ), default="pending")
     food_item = models.ForeignKey(FoodItem, on_delete=models.CASCADE, related_name="food_orders")
     quantity = models.IntegerField()
-    terminal = models.ForeignKey("core.Terminal", related_name="orders", on_delete=models.CASCADE)
+    # terminal = models.ForeignKey("core.Terminal", related_name="orders", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
         return f"{self.food_item} order"
+    
+
+    class Meta:
+        ordering = ["-updated_at"]
+
 
 
 

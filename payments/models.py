@@ -32,3 +32,6 @@ class Payment(models.Model):
     ammount = models.DecimalField(max_digits=13, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-updated_at"]

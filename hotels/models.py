@@ -20,6 +20,10 @@ class Hotel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
+    class Meta:
+        ordering = ["-updated_at"]
+
     def __str__(self):
         return self.name
 
@@ -34,6 +38,11 @@ class RoomType(models.Model):
     description = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+    class Meta:
+        ordering = ["-updated_at"]
+
 
     def __str__(self):
         return self.name
@@ -54,6 +63,9 @@ class Room(models.Model):
 
     def __str__(self):
         return f"{self.hotel} {self.number}"
+    
+    class Meta:
+        ordering = ["-updated_at"]
 
 
 class RoomImage(models.Model):
@@ -75,3 +87,7 @@ class Reservation(models.Model):
     ))
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+    class Meta:
+        ordering = ["-updated_at"]
